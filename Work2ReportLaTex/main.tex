@@ -1,0 +1,163 @@
+%!TeX program = xelatex
+\documentclass[12pt,hyperref,a4paper,UTF8]{ctexart}
+\usepackage{HDUReport}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{setspace}
+\setstretch{1.5} % 设置全局行距为1.5倍
+
+\usepackage{enumitem} % 载入enumitem包以便自定义列表环境
+\setlist[itemize]{itemsep=0pt, parsep=0pt} % 设置itemize环境的项目间距和段落间距
+
+\setmainfont{Times New Roman} % 英文正文为Times New Roman
+
+%封面页设置
+{   
+    %标题
+    \title{ 
+        \vspace{1cm}
+        \heiti \Huge \textbf{Linux系统及应用作业报告} \par
+        \vspace{1cm} 
+        \heiti \Large {\underline{作业2:中国手机操作系统发展综述}   } 
+        \vspace{3cm}
+    
+    }
+
+    \author{
+        \vspace{0.5cm}
+        \kaishu\Large 学院\ \dlmu[9cm]{卓越学院} \\ %学院
+        \vspace{0.5cm}
+        \kaishu\Large 学号\ \dlmu[9cm]{23040447} \\ %班级
+        \vspace{0.5cm}
+        \kaishu\Large 姓名\ \dlmu[9cm]{陈文轩} \qquad  \\ %学号
+        \vspace{0.5cm}
+        \kaishu\Large 专业\ \dlmu[9cm]{智能硬件与系统(电子信息工程)} \qquad \\ %姓名 
+    }
+        
+    \date{\today} % 默认为今天的日期，可以注释掉不显示日期
+}
+%%------------------------document环境开始------------------------%%
+\begin{document}
+
+%%-----------------------封面--------------------%%
+\cover
+\thispagestyle{empty} % 首页不显示页码
+%%------------------摘要-------------%%
+%\newpage
+%\begin{abstract}
+
+
+
+
+%\end{abstract}
+
+%\thispagestyle{empty} % 首页不显示页码
+
+%%--------------------------目录页------------------------%%
+% \newpage
+% \tableofcontents
+% \thispagestyle{empty} % 目录不显示页码
+
+%%------------------------正文页从这里开始-------------------%
+\newpage
+\setcounter{page}{1} % 让页码从正文开始编号
+
+%%可选择这里也放一个标题
+%\begin{center}
+%    \title{ \Huge \textbf{{标题}}}
+%\end{center}
+
+\section{发展历程与技术演进}
+中国手机操作系统发展可分为三个阶段：
+
+\subsection{技术引进期（2008-2012）}
+\begin{itemize}
+    \item 中国移动基于Android 1.5开发OMS系统（2009），预装于联想OPhone，首次实现TD-SCDMA终端适配
+    \item 阿里YunOS采用自主云应用框架（2011），但因兼容性问题导致与谷歌发生冲突\cite{yunos2012}
+\end{itemize}
+
+\subsection{生态培育期（2013-2018）}
+\begin{itemize}
+    \item 华为推出EMUI 1.0（2013），建立首个国产深度定制系统，全球用户突破5亿
+    \item 阿里YunOS 5.0搭载于魅族MX4（2014），市占率曾达7%后因专利纠纷衰退
+\end{itemize}
+
+\subsection{自主创新期（2019至今）}
+\begin{itemize}
+    \item 鸿蒙OS 1.0发布（2019），首次实现分布式架构，代码自主率超80%
+    \item OpenHarmony 3.0 LTS版本发布（2022），形成完整物联网能力矩阵
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{timeline.pdf}
+    \caption{中国手机操作系统里程碑事件}
+    \label{fig:timeline}
+\end{figure}
+
+\section{产业协同模式}
+\subsection{手机厂商合作机制}
+\begin{table}[htbp]
+    \centering
+    \caption{主流国产系统合作厂商（2024）}
+    \begin{tabular}{lll}
+    \toprule
+    操作系统 & 核心合作伙伴 & 装机量（万） \\
+    \midrule
+    鸿蒙OS & 华为、荣耀、格力 & 42,000 \\
+    OpenHarmony & 美的、九阳、传音 & 8,500 \\
+    澎湃OS & 小米 & 12,000 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{运营商深度参与}
+\begin{itemize}
+    \item 中国移动"泛终端计划"：2023年采购2000万台鸿蒙设备
+    \item 中国广电5G NR广播与鸿蒙深度集成，时延降低40%
+\end{itemize}
+
+\section{技术架构对比}
+\begin{table}[htbp]
+    \centering
+    \caption{国内外主流系统技术对比}
+    \begin{tabular}{llll}
+    \toprule
+     & 鸿蒙OS 4.0 & Android 14 & iOS 17 \\
+    \midrule
+    内核类型 & 微内核 & 宏内核 & XNU混合内核 \\
+    分布式时延 & <20ms & 不支持 & 不支持 \\
+    代码自主率 & 82\% & 0\% & 100\% \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{关键挑战}
+\subsection{技术瓶颈}
+\begin{itemize}
+    \item 微内核性能损失：鸿蒙IPC时延比Android高15-30%
+    \item 开发工具链不完善：DevEco Studio功能仅为Android Studio的65%\cite{huawei2023}
+\end{itemize}
+
+\subsection{生态困境}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ecosystem.pdf}
+    \caption{全球移动应用生态覆盖率（2024Q1）}
+    \label{fig:eco}
+\end{figure}
+
+\section{发展路径建议}
+\begin{enumerate}
+    \item \textbf{差异化竞争}：聚焦物联网场景（车载OS时延已优化至5ms）
+    \item \textbf{标准建设}：主导IEEE 2050-202X分布式系统国际标准
+    \item \textbf{人才培养}：教育部"智能基座"计划已覆盖72所高校
+\end{enumerate}
+
+
+
+
+
+
+\end{document}

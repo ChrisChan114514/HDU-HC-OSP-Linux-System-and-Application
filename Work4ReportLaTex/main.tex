@@ -1,0 +1,130 @@
+%!TeX program = xelatex
+\documentclass[12pt,hyperref,a4paper,UTF8]{ctexart}
+\usepackage{HDUReport}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{setspace}
+\setstretch{1.5} % 设置全局行距为1.5倍
+
+\usepackage{enumitem} % 载入enumitem包以便自定义列表环境
+\setlist[itemize]{itemsep=0pt, parsep=0pt} % 设置itemize环境的项目间距和段落间距
+
+\setmainfont{Times New Roman} % 英文正文为Times New Roman
+
+%封面页设置
+{   
+    %标题
+    \title{ 
+        \vspace{1cm}
+        \heiti \Huge \textbf{Linux系统及应用作业报告} \par
+        \vspace{1cm} 
+        \heiti \Large {\underline{作业4:proc虚拟目录的作用}   } 
+        \vspace{3cm}
+    
+    }
+
+    \author{
+        \vspace{0.5cm}
+        \kaishu\Large 学院\ \dlmu[9cm]{卓越学院} \\ %学院
+        \vspace{0.5cm}
+        \kaishu\Large 学号\ \dlmu[9cm]{23040447} \\ %班级
+        \vspace{0.5cm}
+        \kaishu\Large 姓名\ \dlmu[9cm]{陈文轩} \qquad  \\ %学号
+        \vspace{0.5cm}
+        \kaishu\Large 专业\ \dlmu[9cm]{智能硬件与系统(电子信息工程)} \qquad \\ %姓名 
+    }
+        
+    \date{\today} % 默认为今天的日期，可以注释掉不显示日期
+}
+%%------------------------document环境开始------------------------%%
+\begin{document}
+
+%%-----------------------封面--------------------%%
+\cover
+\thispagestyle{empty} % 首页不显示页码
+%%------------------摘要-------------%%
+%\newpage
+%\begin{abstract}
+
+
+
+
+%\end{abstract}
+
+%\thispagestyle{empty} % 首页不显示页码
+
+%%--------------------------目录页------------------------%%
+% \newpage
+% \tableofcontents
+% \thispagestyle{empty} % 目录不显示页码
+
+%%------------------------正文页从这里开始-------------------%
+\newpage
+\setcounter{page}{1} % 让页码从正文开始编号
+
+%%可选择这里也放一个标题
+%\begin{center}
+%    \title{ \Huge \textbf{{标题}}}
+%\end{center}
+
+\section{问题1}
+
+\textbf{Linux系统中的/proc目录与其他目录相比有什么特殊之处?}
+
+\begin{itemize}
+    \item /proc 目录是一个\textbf{虚拟文件系统}(Virtual File System) \cite{man7}  
+    \item \textbf{不占用磁盘空间}：/proc 中的文件并不实际存储在磁盘上，而是由内核动态生成 \cite{kernel-doc}  
+    \item \textbf{实时反映系统状态}：内容随系统运行状态实时变化
+    \item \textbf{特殊权限}：大多数文件即使root用户也无法直接修改 \cite{ubuntu}  
+    \item \textbf{特殊访问方式}：只能通过特定工具(如cat)读取，不能用普通编辑器修改
+    \item \textbf{内核接口}：提供了用户空间与内核交互的接口 \cite{ibm}  
+\end{itemize}
+
+\section{问题2}
+
+\textbf{在/proc目录中包含的数字目录是什么作用?选择其中一个数字目录及其5个内容(文件或子目录)为例说明作用。}
+
+\begin{itemize}
+\item /proc下的数字目录对应系统中正在运行的\textbf{进程ID(PID)} \cite{tldp}  
+\item 每个数字目录包含对应进程的详细信息和控制接口
+\item 以PID为1的init进程目录为例 \cite{man7}  ：
+\begin{itemize}
+\item \textbf{/proc/1/cmdline}：显示进程的完整启动命令及参数
+\item \textbf{/proc/1/status}：包含进程状态、内存使用、信号掩码等信息
+\item \textbf{/proc/1/fd}：目录包含进程打开的所有文件描述符
+\item \textbf{/proc/1/cwd}：符号链接指向进程的当前工作目录
+\item \textbf{/proc/1/exe}：符号链接指向进程的可执行文件路径
+\end{itemize}
+\end{itemize}
+
+\section{问题3}
+
+\textbf{/proc下的文件都有什么作用或者信息?例举其中5个文件说明。}
+
+\begin{itemize}
+\item \textbf{/proc/cpuinfo}：详细记录CPU信息（型号、核心数、缓存大小、频率等）\cite{kernel-doc}  
+\item \textbf{/proc/meminfo}：全面统计系统内存使用情况（总量、空闲、缓存等）\cite{ibm}  
+\item \textbf{/proc/mounts}：列出当前所有挂载的文件系统及其挂载参数 \cite{ubuntu}  
+\item \textbf{/proc/version}：显示当前运行的内核版本和编译信息 \cite{man7}  
+\item \textbf{/proc/net/dev}：提供网络接口的详细统计信息（收发包数、错误数等）\cite{tldp}
+\end{itemize}
+
+\section{问题4}
+
+\textbf{/proc与Linux内核有什么关系?}
+
+\begin{itemize}
+\item \textbf{内核信息窗口}：/proc是内核向用户空间暴露运行时信息的标准接口 \cite{kernel-doc}  
+\item \textbf{动态数据映射}：文件内容直接映射内核数据结构和系统状态 \cite{ibm}  
+\item \textbf{内核调优入口}：通过/proc/sys/目录可以动态调整内核参数 \cite{man7}  
+\item \textbf{进程管理基础}：为系统监控工具（如ps、top）提供进程数据源 \cite{tldp}  
+\item \textbf{调试诊断接口}：开发者可通过/proc获取内核运行时的调试信息 \cite{ubuntu}  
+\end{itemize}
+
+\reference
+
+
+
+
+\end{document}
