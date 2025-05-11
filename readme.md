@@ -14,11 +14,9 @@ ZX老师讲课很认真，**我不好好听课其实很愧疚**，不知道期�
 
 ## 智慧树作业报告 (work1~work5)
 
-**都用Latex写，我说了word狗都不用**，作业5的shell脚本是AI写的，我这里**Ubuntu 24.04.2 LTS**可以用的。
+**都用Latex写，我说了word狗都不用**，作业5的shell脚本是AI写的（SH文件放在work5的文件夹里面了），我这里**Ubuntu 24.04.2 LTS**可以用的。
 
 报告在每一个文件夹的main.pdf里。
-
-
 
 ChrisChan
 
